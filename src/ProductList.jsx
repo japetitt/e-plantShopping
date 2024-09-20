@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from 'react';
-import { useDispatch } from 'react-redux'; // Import useDispatch
+import { useDispatch, useSelector } from 'react-redux'; // Import useDispatch
 import './ProductList.css'
 import CartItem from './CartItem';
 import {addItem } from './CartSlice'
@@ -8,6 +8,11 @@ function ProductList() {
     const [showCart, setShowCart] = useState(false); 
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
     const [addedToCart, setAddedToCart] = useState({});
+    const cartItems = useSelector((state) => state.cart.items);
+   
+    // Compute the number of unique items in the cart
+    const totalUniqueItems = cartItems.length;
+
     const plantsArray = [
         {
             category: "Air Purifying Plants",
@@ -287,7 +292,7 @@ const handlePlantsClick = (e) => {
                                     <circle cx="184" cy="216" r="12"></circle>
                                     <path d="M42.3,72H221.7l-26.4,92.4A15.9,15.9,0,0,1,179.9,176H84.1a15.9,15.9,0,0,1-15.4-11.6L32.5,37.8A8,8,0,0,0,24.8,32H8" fill="none" stroke="#faf9f9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" id="mainIconPathAttribute"></path>
                              </svg>
-                             <span className="cart_quantity_count">2</span>
+                             <span className="cart_quantity_count">{totalUniqueItems}</span>
                         </h1>
                      </a>
                   </div>
